@@ -36,4 +36,18 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(
 				new AppResponseDto<>(ResponseStatus.BAD_REQUEST.value(), ResponseStatus.BAD_REQUEST.name(), response), HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(NotFoundException.class)
+	ResponseEntity <AppResponseDto<Object>> onNotFoundException() {
+		return new ResponseEntity<>(
+				new AppResponseDto<>(ResponseStatus.NOT_FOUND.value(), ResponseStatus.NOT_FOUND.name()), HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(Exception.class)
+	ResponseEntity <AppResponseDto<Object>> onOtherException(Exception exception) {
+		return new ResponseEntity<>(
+				new AppResponseDto<>(ResponseStatus.SERVER_ERROR.value(), ResponseStatus.SERVER_ERROR.name()), HttpStatus.NOT_FOUND);
+	}
+	
+	
 }
