@@ -13,7 +13,7 @@ public class Post {
 
 	@Id
 	@GeneratedValue
-	private String id;
+	private Long id;
 
 	private String message;
 
@@ -21,11 +21,11 @@ public class Post {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

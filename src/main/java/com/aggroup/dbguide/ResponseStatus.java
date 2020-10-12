@@ -2,7 +2,7 @@ package com.aggroup.dbguide;
 
 public enum ResponseStatus {
 
-	SUCCESSFUL("1"), INFORMATIONAL("2"), NOT_FOUND("3"), BAD_REQUEST("4"), SERVER_ERROR("5");
+	SUCCESSFUL("200"), INFORMATIONAL("100"), NOT_FOUND("404"), BAD_REQUEST("400"), SERVER_ERROR("500");
 
 	private final String value;
 

@@ -30,6 +30,14 @@ public class UserService {
 		return user.get();
 	}
 	
+	public User saveUser(User user) {
+		return userDao.save(user);
+	}
+	
+	public void deleteUserById(Long id) {
+		userDao.deleteById(id);
+	}
+	
 	public List<Post> findPostsByUserId(Long id) {
 		Optional<User> user= userDao.findById(id);
 		if (!user.isPresent())

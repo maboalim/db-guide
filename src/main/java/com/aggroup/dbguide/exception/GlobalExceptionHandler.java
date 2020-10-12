@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	ResponseEntity <AppResponseDto<Object>> onOtherException(Exception exception) {
 		return new ResponseEntity<>(
-				new AppResponseDto<>(ResponseStatus.SERVER_ERROR.value(), ResponseStatus.SERVER_ERROR.name()), HttpStatus.NOT_FOUND);
+				new AppResponseDto<>(ResponseStatus.SERVER_ERROR.value(), ResponseStatus.SERVER_ERROR.name(), exception.getMessage()), HttpStatus.BAD_REQUEST);
 	}
 	
 	
