@@ -1,8 +1,13 @@
 package com.aggroup.dbguide.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,8 +47,16 @@ public class UserController {
 	@ApiResponses({ @ApiResponse(responseCode = "200", description = "Success"),
 			@ApiResponse(responseCode = "404", description = "Not Found") })
 	@GetMapping(value = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = { MediaType.ALL_VALUE })
-	public User findById(@PathVariable Long id) {
-		return userService.findById(id);
+	public EntityModel<User> findById(@PathVariable Long id) {
+		User user = userService.findById(id);
+
+		// HATEOAS - Return the links which the user may need it as next step
+		EntityModel<User> resource = EntityModel.of(user);
+		WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).findAll());
+
+		resource.add(linkTo.withRel("all-users"));
+
+		return resource;
 	}
 
 	@Operation(description = "Save new user")
